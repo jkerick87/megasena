@@ -32,7 +32,8 @@ def gerar_combinacoes(request):
     combinacoes_resultado = []
     combinacoes_sorteadas = []
     quantidade = None
-    dezenas = None
+    dezenas = ""
+    data_sorteio = ""
     data=None
     concurso=None
     resultados_megasena = buscar_resultados_megasena()
@@ -66,7 +67,8 @@ def gerar_combinacoes(request):
                 #print('DEZENAS DO CONSURSO:',r["dezenas"])
                 # Verifica se todos os elementos da combinação estão nas dezenas sorteadas
                 if teste == teste.intersection(dezenas_sorteadas):
-                    
+                    data_sorteio = data
+                    concurso = concurso
                     print(f'Combinação encontrada! Dezenas sorteadas: {dezenas_ordenadas} na data: {data}, sorteio: {concurso}')
                     
                     # Armazena a data do sorteio para a combinação
@@ -78,14 +80,14 @@ def gerar_combinacoes(request):
                 for combinacao in combinacoes_resultado
                 if set(map(str, combinacao)) in [set(r["dezenas"]) for r in resultados_megasena]
             ]
-        
+    print(f"A data do sorteio é: {data_sorteio}, concurso é: {concurso}")    
     context = {
         'quantidade': quantidade,
         'dezenas': dezenas,
         'combinacoes_resultado': combinacoes_resultado,
         'combinacoes_sorteadas': combinacoes_sorteadas,
-        'intervalo_quantidades': range(6, 11),
-        'data': data,
+        'intervalo_quantidades': range(5, 11),
+        'data': data_sorteio,
         'concurso': concurso,
   
     }

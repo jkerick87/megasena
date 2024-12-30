@@ -110,9 +110,15 @@
             <h2>Combinações Geradas:</h2>
             <ul>
                 {% for combinacao in combinacoes_resultado %}
-                    <li 
-                        class="{% if combinacao in combinacoes_sorteadas %}highlight{% endif %}">
-                        {{ combinacao|join:", " }}
+                    {% if combinacao in combinacoes_sorteadas %}
+                    
+                        <li 
+                            class="{% if combinacao in combinacoes_sorteadas %}highlight{% endif %}">
+                        {{ combinacao|join:", "}} - {{ data }}
+                    {% else %}
+                        <li>{{ combinacao|join:", "}}    
+                    {% endif %}
+                    
                 {% endfor %}
             </ul>
         {% endif %}
